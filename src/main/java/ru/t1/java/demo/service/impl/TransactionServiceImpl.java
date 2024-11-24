@@ -84,7 +84,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Long userTransactionsCountInInterval(Long userId, LocalDateTime dateTime) {
-        Collection<Transaction> transactions = transactionRepository.findByUserIdAndDateTimeGreaterThan(userId, dateTime);
+        Collection<Transaction> transactions = transactionRepository.findByAccountIdAndDateTimeGreaterThan(userId, dateTime);
         Long transactionsCount = (long) transactions.size();
         return transactionsCount;
     }

@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     @Override
     Optional<Transaction> findById(Long aLong);
-    Collection<Transaction> findByUserIdAndDateTimeGreaterThan(Long userId, LocalDateTime localDateTime);
+    Collection<Transaction> findByAccountIdAndDateTimeGreaterThan(Long userId, LocalDateTime localDateTime);
 }

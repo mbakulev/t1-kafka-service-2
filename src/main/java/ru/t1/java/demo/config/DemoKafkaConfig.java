@@ -32,7 +32,7 @@ import java.util.Map;
 @Configuration
 public class DemoKafkaConfig<T> {
 
-    @Value("${t1.kafka.consumer.group-id}")
+    @Value("${t1.kafka.consumer.t1_demo_transaction_accept}")
     private String groupId;
     @Value("${t1.kafka.bootstrap.server}")
     private String servers;
@@ -44,8 +44,8 @@ public class DemoKafkaConfig<T> {
     private String maxPollRecords;
     @Value("${t1.kafka.max.poll.interval.ms:3000}")
     private String maxPollIntervalsMs;
-    @Value("${t1.kafka.topic.client_id_registered}")
-    private String clientTopic;
+//    @Value("${t1.kafka.topic.client_id_registered}")
+//    private String clientTopic;
 
     private Map<String, Object> getDefaultProps() {
         Map<String, Object> props = new HashMap<>();
