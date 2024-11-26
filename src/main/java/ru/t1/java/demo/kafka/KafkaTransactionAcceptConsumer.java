@@ -37,13 +37,20 @@ public class KafkaTransactionAcceptConsumer {
         try {
             out.println("TransactionAccept: " + transactionAccept);
             TransactionAcceptResult transactionAcceptResult = new TransactionAcceptResult();
+            transactionAcceptResult.setTransactionId(transactionAccept.getTransactionId());
+            transactionAcceptResult.setTransactionAmount(transactionAccept.getTransactionAmount());
+            transactionAcceptResult.setDateTime(transactionAccept.getDateTime());
+            transactionAcceptResult.setAccountId(transactionAccept.getAccountId());
+            transactionAcceptResult.setUserId(transactionAccept.getUserId());
+            transactionAcceptResult.setAccountBalance(transactionAccept.getAccountBalance());
 
             LocalDateTime nowMinusInterval = LocalDateTime.now().minusSeconds(transactionInterval);
 
             Long userTransactionsCount = transactionService.userTransactionsCountInInterval(transactionAccept.getUserId(), nowMinusInterval);
-            if (userTransactionsCount >= maxTransactionsPerInterval) {
+            if (userTransactionsCount > maxTransactionsPerInterval) {
                 transactionAcceptResult.setStatus("BLOCKED");
             } else {
+                out.println();
                 if (transactionAccept.getAccountBalance().compareTo(transactionAccept.getTransactionAmount()) < 0) {
                     transactionAcceptResult.setStatus("REJECTED");
                 } else {
